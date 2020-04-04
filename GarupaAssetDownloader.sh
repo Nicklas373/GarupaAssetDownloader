@@ -78,21 +78,21 @@ read answer
 			for (( i=1; i<=9; i++))
 				do
 					echo "Downloading Sound Assets..."
-					wget -nc https://res.bandori.ga/assets/sound/bgm00$i
+					wget -nc https://res.bandori.ga/assets-jp/sound/bgm00$i
 			done
 
 			# Loop for 10 - 99
 			for (( i=10; i<=99; i++))
 				do
 					echo "Downloading Sound Assets..."
-					wget -nc https://res.bandori.ga/assets/sound/bgm0$i
+					wget -nc https://res.bandori.ga/assets-jp/sound/bgm0$i
 			done
 
 			# Loop for 100 - 262
 			for (( i=100; i<=262; i++))
 				do
 					echo "Downloading Sound Assets..."
-					wget -nc https://res.bandori.ga/assets/sound/bgm$i
+					wget -nc https://res.bandori.ga/assets-jp/sound/bgm$i
 			done
 
 	elif [ "$answer" == "2" ];
@@ -109,7 +109,7 @@ read answer
 			cd ..
 			cd MV
 			echo "Downloading AMV Assets..."
-			wget -nc https://res.bandori.ga/assets/movie/mv/music_video_$code"_hq"
+			wget -nc https://res.bandori.ga/assets-jp/movie/mv/music_video_$code"_hq"
 	fi
 
 }
