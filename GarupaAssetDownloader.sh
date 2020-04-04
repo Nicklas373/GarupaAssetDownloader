@@ -108,32 +108,41 @@ read answer
 			# So it'll need to decompress manually after complete download
 			cd ..
 			cd MV
+
 			echo "Downloading AMV Assets..."
-			wget -nc https://res.bandori.ga/assets-jp/movie/mv/music_video_$code"_hq"
+			wget -nc https://res.bandori.ga/assets-jp/movie/mv/music_video_$code"_hq" ||
+			echo "First HQ AMV Assets Not Found, Downloading AMV Assets"
+			wget -nc https://res.bandori.ga/assets-jp/movie/mv/music_video_$code"(2)" ||
+			echo "HQ AMV Assets Not Found, Downloading Standard AMV Assets"
+			wget -nc https://res.bandori.ga/assets-jp/movie/mv/music_video_$code ||
+			echo "This $code Asset Isn't Available..."
+
+			# Back to main function
+			main
 	fi
 
 }
 
-function looping_phase_1(){	
-# Looping for number 0 - 9	
-for (( j=1; j<=9; j++))	
-	do	
-		 mv $ff-00$j.$fe $ff.00$j	
-	done	
-}	
-function looping_phase_2(){	
-# Looping for number 10 - 99	
-for (( i=10; i<=99; i++ ))	
-	do	
-		mv $ff-0$i.$fe $ff.0$i	
-	done	
-}	
-function looping_phase_3(){	
-# Looping for number 100 - 411	
-for (( k =100; k<=411; k++ ))	
-	do	
-		mv $ff-$k.$fe $ff.$k	
-	done	
+function looping_phase_1(){
+# Looping for number 0 - user defined
+for (( j=1; j<=$n; j++))
+	do
+		 mv $ff-00$n.$fe $ff.00$n
+	done
+}
+function looping_phase_2(){
+# Looping for number 10 - user defined
+for (( i=10; i<=$m; i++ ))
+	do
+		mv $ff-0$m.$fe $ff.0$m
+	done
+}
+function looping_phase_3(){
+# Looping for number 100 - user defined
+for (( k=100; k<=$l; k++ ))
+	do
+		mv $ff-$l.$fe $ff.$l
+	done
 }
 
 function join() {
@@ -145,15 +154,33 @@ echo "Please Enter filename"
 read ff
 echo "Please Enter file extension"
 read fe
+echo "How much part for that assets ?"
+read k
 
-echo "Looping Phase 1"	
-looping_phase_1	
-echo ""	
-echo "Looping Phase 2"	
-looping_phase_2	
-echo ""	
-echo "Looping Phase 3"	
-looping_phase_3
+if (("$k"<"10"))
+	then
+		# Initiate looping
+		n = $k
+
+		# Running only 1# phase loop
+		looping_phase_1
+elif (("$k">="10" && "$k" <="99"))
+	then
+		# Initiate looping
+		m = $k
+
+		# Running only 2# phase loop
+		looping_phase_2
+elif (("$k">="100"))
+	then
+		# Initiate looping
+		l = $k
+
+		# Running only 3# phase loop
+		looping_phase_3
+else
+	echo "undefined part of assets O_o"
+fi
 }
 
 # Run
