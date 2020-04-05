@@ -24,6 +24,7 @@ echo " Welcome to GarupaAssetDownloader "
 echo " What do you want to do ? "
 echo " 1. Download Assets "
 echo " 2. Join Assets "
+echo " 3. Exit "
 echo ""
 read choice
 
@@ -33,6 +34,9 @@ if [ "$choice" == "1" ];
 elif [ "$choice" == "2" ];
 	then
 		join
+elif [ "$choice" == "3" ];
+	then
+		exit 1
 else
 	main
 fi
@@ -123,28 +127,6 @@ read answer
 
 }
 
-function looping_phase_1(){
-# Looping for number 0 - user defined
-for (( j=1; j<=$n; j++))
-	do
-		 mv $ff-00$n.$fe $ff.00$n
-	done
-}
-function looping_phase_2(){
-# Looping for number 10 - user defined
-for (( i=10; i<=$m; i++ ))
-	do
-		mv $ff-0$m.$fe $ff.0$m
-	done
-}
-function looping_phase_3(){
-# Looping for number 100 - user defined
-for (( k=100; k<=$l; k++ ))
-	do
-		mv $ff-$l.$fe $ff.$l
-	done
-}
-
 function join() {
 # This is looping argument to remove all current file extensions
 # From splitted raw assets files, so it can be readed by hjsplit
@@ -160,30 +142,55 @@ read k
 if (("$k"<"10"))
 	then
 		# Initiate looping
-		n = "$k"
+		n="$k"
 
-		# Running only 1# phase loop
-		looping_phase_1
+		# Looping for number 0 - user defined
+		for (( j=1; j<=$n; j++))
+			do
+				 mv $ff-00$j.$fe $ff.00$j
+		done
 elif (("$k">="10" && "$k" <="99"))
 	then
 		# Initiate looping
-		n = "10"
-		m = "$k"
+		n="10"
+		m="$k"
 
-		# Running phase 1# and phase 2# loop
-		looping_phase_1
-		looping_phase_2
+		# Looping for number 0 - user defined
+		for (( j=1; j<=$n; j++))
+			do
+				 mv $ff-00$j.$fe $ff.00$j
+		done
+
+		# Looping for number 10 - user defined
+		for (( i=10; i<=$m; i++ ))
+			do
+				mv $ff-0$i.$fe $ff.0$i
+		done
+
 elif (("$k">="100"))
 	then
 		# Initiate looping
-		n = "10"
-		m = "99"
-		l = $k
+		n="10"
+		m="99"
+		l="$k"
 
-		# Running phase 1# , phase 2# and phase 3# loop
-		looping_phase_1
-		looping_phase_2
-		looping_phase_3
+		# Looping for number 0 - user defined
+		for (( j=1; j<=$n; j++))
+			do
+		 		mv $ff-00$j.$fe $ff.00$j
+		done
+
+		# Looping for number 10 - user defined
+		for (( i=10; i<=$m; i++ ))
+			do
+				mv $ff-0$i.$fe $ff.0$i
+		done
+
+		# Looping for number 100 - user defined
+		for (( k=100; k<=$l; k++ ))
+			do
+				mv $ff-$k.$fe $ff.$k
+		done
 else
 	echo "undefined part of assets O_o"
 fi
