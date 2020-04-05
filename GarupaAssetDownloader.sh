@@ -160,27 +160,38 @@ read k
 if (("$k"<"10"))
 	then
 		# Initiate looping
-		n = $k
+		n = "$k"
 
 		# Running only 1# phase loop
 		looping_phase_1
 elif (("$k">="10" && "$k" <="99"))
 	then
 		# Initiate looping
-		m = $k
+		n = "10"
+		m = "$k"
 
-		# Running only 2# phase loop
+		# Running phase 1# and phase 2# loop
+		looping_phase_1
 		looping_phase_2
 elif (("$k">="100"))
 	then
 		# Initiate looping
+		n = "10"
+		m = "99"
 		l = $k
 
-		# Running only 3# phase loop
+		# Running phase 1# , phase 2# and phase 3# loop
+		looping_phase_1
+		looping_phase_2
 		looping_phase_3
 else
 	echo "undefined part of assets O_o"
 fi
+
+echo "Your asset $ff.$fe already renamed !"
+
+# Return to main program
+main
 }
 
 # Run
