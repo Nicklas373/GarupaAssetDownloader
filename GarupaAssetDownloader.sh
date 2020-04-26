@@ -92,8 +92,8 @@ read answer
 					wget -nc https://res.bandori.ga/assets-jp/sound/bgm0$i
 			done
 
-			# Loop for 100 - 262
-			for (( i=100; i<=262; i++))
+			# Loop for 100 - 266
+			for (( i=100; i<=266; i++))
 				do
 					echo "Downloading Sound Assets..."
 					wget -nc https://res.bandori.ga/assets-jp/sound/bgm$i
