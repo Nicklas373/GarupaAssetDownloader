@@ -24,7 +24,8 @@ echo " Welcome to GarupaAssetDownloader "
 echo " What do you want to do ? "
 echo " 1. Download Assets "
 echo " 2. Join Assets "
-echo " 3. Exit "
+echo " 3. Cleanup "
+echo " 4. Exit "
 echo ""
 read choice
 
@@ -35,6 +36,18 @@ elif [ "$choice" == "2" ];
 	then
 		join
 elif [ "$choice" == "3" ];
+	then
+		if [ ! -d "$Sound" ];
+			then
+				echo "Sound folder wasn't exist, please download the assets first!"
+				download
+		else
+			echo "Okay, Checking up :3"
+			cleanup_phase_1
+			cleanup_phase_2
+			cleanup_phase_3
+		fi
+elif [ "$choice" == "4" ];
 	then
 		exit 1
 else
@@ -198,6 +211,94 @@ fi
 echo "Your asset $ff.$fe already renamed !"
 
 # Return to main program
+main
+}
+
+function cleanup_phase_1() {
+# This function will remove bgm file
+# That size are less than 1 MB
+
+# Change to sound directory
+cd Sound
+
+# Init filename
+filename=bgm
+filename_start=00
+maxsize=1048576 # 1 MB
+
+# Looping phase start
+# Phase 0-10
+for (( j=1; j<10; j++))
+	do
+		file=$filename$filename_start$j
+		filesize=$(stat -c%s "$file")
+
+		if [ $(stat --printf="%s" $file) -lt $maxsize ];
+			then
+				echo "$file was removed due less than 1MB, size is $filesize bytes"
+				rm $file
+		else
+			echo "Size of $file = $filesize bytes."
+		fi
+done
+}
+
+function cleanup_phase_2() {
+# This function will remove bgm file
+# That size are less than 1 MB
+
+# Init filename
+filename=bgm
+filename_start=0
+maxsize=1048576 # 1 MB
+
+# Looping phase start
+# Phase 0-10
+for (( j=11; j<=99; j++))
+	do
+		file=$filename$filename_start$j
+		filesize=$(stat -c%s "$file")
+
+		if [ $(stat --printf="%s" $file) -lt $maxsize ];
+			then
+				echo "$file was removed due less than 1MB, size is $filesize bytes"
+				rm $file
+		else
+			echo "Size of $file = $filesize bytes."
+		fi
+done
+}
+
+function cleanup_phase_3() {
+# This function will remove bgm file
+# That size are less than 1 MB
+
+# Init filename
+filename=bgm
+maxsize=1048576 # 1 MB
+
+# Looping phase start
+# Phase 0-10
+for (( j=100; j<283; j++))
+	do
+		file=$filename$j
+		filesize=$(stat -c%s "$file")
+
+		if [ $(stat --printf="%s" $file) -lt $maxsize ];
+			then
+				echo "$file was removed due less than 1MB, size is $filesize bytes"
+				rm $file
+		else
+			echo "Size of $file = $filesize bytes."
+		fi
+done
+
+# Back to main directory
+cd ..
+
+echo "Cleanup done :3"
+
+# Run main program
 main
 }
 
