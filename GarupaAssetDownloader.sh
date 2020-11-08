@@ -129,8 +129,8 @@ read answer
 			# Cleanng unused files on second loop
 			cleanup_phase_2
 
-			# Loop for 100 - 283
-			for (( i=100; i<=283; i++))
+			# Loop for 100 - 299
+			for (( i=100; i<=299; i++))
 				do
 					echo "Downloading Sound Assets..."
 					wget -nc https://res.bandori.ga/assets-jp/sound/bgm$i
