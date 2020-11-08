@@ -6,7 +6,7 @@ This is a linux based script that can download ACB or USM assets files for BGM /
 2. If user want to download, then script will ask if user want to download audio or video assets
 3. Script will download current user choice as batch process (For audio it'll download all audio files in 1 job)
 4. For Video, user will need to enter video name that exist on https://bandori.top/. 
-	ex: https://bandori.top//music/jp/217
+	ex: https://bandori.top/music/jp/217
 		then video name is 217
 5. It's same with extract option, which need user enter filename to rename all splitted file
 
